@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Admin Dashboard – Shirtify</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet"/>
+  @stack('style')
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet" />
   <style>
     body {
       font-family: "Segoe UI", sans-serif;
@@ -52,7 +54,8 @@
       padding: 30px;
     }
 
-    .table th, .table td {
+    .table th,
+    .table td {
       vertical-align: middle;
     }
 
@@ -65,6 +68,7 @@
     }
   </style>
 </head>
+
 <body>
 
   <div class="container-fluid">
@@ -72,14 +76,35 @@
 
       <!-- Sidebar -->
       <div class="col-md-2 sidebar">
-        <div class="text-center py-4 fs-4 border-bottom">🧥 <strong>Shirtify</strong></div>
-        <a href="/admin/main" class="active"><i class="ri-dashboard-line me-2"></i> Dashboard</a>
+        <div class="text-center py-4 fs-4 border-bottom"> <a href="/">🧥<strong>Shirtify</strong></a></div>
+        <!-- <a href="/admin/main" class="active"><i class="ri-dashboard-line me-2"></i> Dashboard</a>
         <a href="/admin/products"><i class="ri-shirt-line me-2"></i> Products</a>
-        <a href="/admin/orders"><i class="ri-shopping-bag-line me-2"></i> Orders</a>
+        <a href="/admin/category"><i class="ri-shirt-line me-2"></i> CAtegory</a>
+        <a href="/admin/orders"><i class="ri-shopping-bag-line me-2"></i> Orders</a> -->
+
+        <a href="/admin/main" class="{{ request()->is('admin/main') ? 'active' : '' }}">
+          <i class="ri-dashboard-line me-2"></i> Dashboard
+        </a>
+
+        <a href="/admin/products" class="{{ request()->is('admin/products') ? 'active' : '' }}">
+          <i class="ri-shirt-line me-2"></i> Products
+        </a>
+
+        <a href="/admin/category" class="{{ request()->is('admin/category') ? 'active' : '' }}">
+          <i class="ri-shirt-line me-2"></i> Category
+        </a>
+
+        <a href="/admin/orders" class="{{ request()->is('admin/orders') ? 'active' : '' }}">
+          <i class="ri-shopping-bag-line me-2"></i> Orders
+        </a>
+
+
+
         <a href="#"><i class="ri-user-line me-2"></i> Users</a>
-        <form method="POST" action="{{ route("logout") }}">
-            @csrf
-            <button class="nav-link text-danger mt-auto">Logout</button>
+        <form method="POST" action="{{ route('logout') }}" >
+          @csrf
+         
+          <button  class="nav-link text-danger ms-4">  <i class="ri-logout-box-r-line"></i> Logout</button>
         </form>
       </div>
 
@@ -87,12 +112,30 @@
       <div class="col-md-10 content">
         <div class="topbar">Admin Dashboard</div>
 
-            @yield('main')
+        @yield('main')
 
       </div>
     </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const links = document.querySelectorAll('.sidebar a');
+
+    links.forEach(link => {
+      link.addEventListener('click', function (e) {
+        // Remove 'active' class from all links
+        links.forEach(l => l.classList.remove('active'));
+
+        // Add 'active' class to the clicked link
+        this.classList.add('active');
+      });
+    });
+  });
+</script>
+
+  @stack('script')
 </body>
+
 </html>

@@ -1,0 +1,46 @@
+/* Navbar custom styles */
+.navbar {
+    background-color: #343a40;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.8rem;
+}
+
+.nav-link {
+    font-size: 1.1rem;
+    color: white !important;
+}
+.red{
+    color: #f7444e !important;
+}
+
+ .nav-link:hover {
+    color:#f7444e  !important;
+}
+.navbar-brand:hover {
+    color:#f7444e  !important;
+}
+li{
+    font-weight: 500;
+}
+.dropdown ul li a{
+    font-weight: 500;
+}
+.dropdown-menu{
+    background-color: rgba(208, 206, 206, 0.591);
+    border: none;
+}
+.dropdown-item{
+    font-size: 1.2rem;
+}
+.dropdown-item:hover{
+background-color: rgba(61, 59, 59, 0.911);
+}
+
+
+
+
+
+

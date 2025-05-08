@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Shirt;
 use Illuminate\Http\Request;
 
 class ShopController extends Controller
 {
     
-    public function index() {
-        echo "working";
-    }
+
+   public function contect(){
+    return view('blog.contect');
+   }
 }

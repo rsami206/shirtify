@@ -1,6 +1,13 @@
 @extends('admin.layout')
 
 @section('main')
+
+{{-- Success Message --}}
+    @if(session('success'))
+    <div class="alert alert-success mt-2">
+        {{ session('success') }}
+    </div>
+    @endif
 <!-- Analytics Cards -->
 <div class="row mt-4 mb-4 g-4">
 
@@ -17,6 +24,7 @@
                         <th>#</th>
                         <th>Product</th>
                         <th>Category</th>
+                        <th>Image</th>
                         <th>Stock</th>
                         <th>Price</th>
                         <th>Actions</th>
@@ -28,6 +36,13 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $product->name }}</td>
                             <td>{{ $product->category->name ?? 'N/A' }}</td>
+                            <td>
+                @if($product->image_path)
+                    <img src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->name }}" style="width: 60px; height: auto;" class="img-thumbnail">
+                @else
+                    <span class="text-muted">No image</span>
+                @endif
+            </td>
                             <td>{{ $product->stock }}</td>
                             <td>₨{{ number_format($product->price, 2) }}</td>
                             <td>
