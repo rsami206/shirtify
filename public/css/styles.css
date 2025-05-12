@@ -44,3 +44,22 @@ background-color: rgba(61, 59, 59, 0.911);
 
 
 
+#testimonials .card {
+    transition: transform 0.2s ease-in-out;
+}
+#testimonials .card:hover {
+    transform: translateY(-5px);
+}
+
+.my-button{
+    border: 1px solid;
+    padding: 0px 16px;
+    /* background-color: black; */
+    /* color: white; */
+    /* font-size: 20px; */
+    font-weight: 800;
+}
+.my-button:hover{
+     background-color: black;
+    color: white;
+}

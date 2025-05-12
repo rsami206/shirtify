@@ -11,8 +11,10 @@ class AdminController extends Controller
 {
     
     public function index()
+
     {
-        return view("admin.index");
+        $products = Shirt::all()->count();
+        return view("admin.index",compact('products'));
     }
 
     public function products() 

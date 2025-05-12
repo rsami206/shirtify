@@ -115,4 +115,15 @@ class ProductController extends Controller
             return redirect()->route("admin.products")->with("success", "successfully deleted");
         }
     }
+
+
+
+
+    public function categoryProducts($id)
+{
+    $category = Category::findOrFail($id);
+    $products = $category->products()->get(); // assumes a hasMany relation
+
+    return view('shop.category', compact('category', 'products'));
+}
 }

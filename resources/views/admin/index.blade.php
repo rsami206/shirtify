@@ -31,7 +31,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                   <div>
                     <h6 class="text-muted">Products</h6>
-                    <h4>48</h4>
+                    <h4>{{$products}}</h4>
                   </div>
                   <i class="ri-shirt-line card-icon"></i>
                 </div>

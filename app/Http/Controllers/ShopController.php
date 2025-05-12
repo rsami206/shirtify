@@ -9,7 +9,13 @@ class ShopController extends Controller
 {
     
 
-   public function contect(){
-    return view('blog.contect');
+   public function about(){
+      return view('blog.about');
+   }
+   public function services(){
+      return view('blog.services');
+   }
+   public function testimonial(){
+      return view('blog.testimonial');
    }
 }

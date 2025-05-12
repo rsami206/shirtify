@@ -29,20 +29,23 @@
 
 <body>
   <!-- Navbar -->
-  @include('partials.navbar')
+  @include('partials.navbar' )
 
   <!-- hero section -->
 
   @if(request()->routeIs('shop.index'))
   @include('partials.hero')
+  @include('partials.why')
+   @include('partials.arival')
   @endif
-
-  <!-- Main content -->
+  
+  <!--  Main content -->
 
   <div class="">
     @yield('content')
 
   </div>
+  
 
   <!-- footer include -->
   @include('partials.footer')

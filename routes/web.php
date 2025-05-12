@@ -5,6 +5,8 @@ use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\ContectController;
 use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,14 +24,18 @@ Route::get("/signup", [AuthController::class, 'signupForm'])->name("signupForm")
 Route::post("/register", [AuthController::class, 'register'])->name("register");
 
 
-// nav link setup
-Route::get('/contect',[ShopController::class,'contect'])->name('contect');
+//  nav link hendle contects, about
+Route::get('/about', [ShopController::class, 'about'])->name('about.show');
+Route::get('/services', [ShopController::class, 'services'])->name('services.show');
+Route::get('/testimonial', [ShopController::class, 'testimonial'])->name('testimonial.show');
 
+Route::get('/contact', [ContectController::class, 'show'])->name('contact.show');
+Route::post('/contact', [ContectController::class, 'submit'])->name('contact.submit');
 
 
 
 // Admin Dashboard Routes
-Route::middleware(['auth'])->prefix('admin')->group(function () {
+Route::middleware(['auth','is_admin'])->prefix('admin')->group(function () {
 
     Route::get("/main", [AdminController::class, 'index'])->name('admin.main');
     Route::get("/products", [AdminController::class, 'products'])->name('admin.products');
@@ -46,6 +52,14 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
 
 
 
+
+
+    // jaskhasdkj
+    Route::get('/category/{id}', [ProductController::class, 'categoryProducts'])->name('category.products');
+
+
+
+
     // category crud routs
 
     
@@ -56,3 +70,14 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
    Route::post("/cats/update/{id}", [CategoryController::class, 'update'])->name('cats.update');
 
 });
+
+
+// cart setup
+// Route::middleware(['auth'])->group(function () {
+
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/add-to-cart/{id}', [CartController::class, 'add'])->name('cart.add');
+Route::post('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
+Route::get('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
+
+// });

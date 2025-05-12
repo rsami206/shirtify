@@ -12,55 +12,60 @@
                 <li class="nav-item">
                     <a class="nav-link red active" aria-current="page" href="{{ url('/') }}">Home</a>
                 </li>
-               
+
                 <li class="nav-item">
-                    <a class="nav-link" href="">About Us</a>
+                    <a class="nav-link" href="{{ route('about.show') }}">About Us</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/contect">Contact</a>
+                    <a class="nav-link" href="{{route('contact.show')}}">Contact</a>
                 </li>
+                <!-- Categories Dropdown -->
                 <!-- Categories Dropdown -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Categories
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="nav-link dropdown-item" href="">Casual Wear</a></li>
-                        <li><a class="nav-link dropdown-item" href="">Classic Shirts</a></li>
-                        <li><a class="nav-link dropdown-item" href="">Premium Collection</a></li>
-                        <li><a class="nav-link dropdown-item" href="">Sports & Active</a></li>
+                        @foreach($categories as $category)
+                        <li>
+                            <a class="dropdown-item" href="/?category={{$category->name}}">
+                                {{ $category->name }}
+                            </a>
+                        </li>
+                        @endforeach
                     </ul>
                 </li>
+
                 <!-- Cart Link -->
                 <li class="nav-item">
-                    <a class="nav-link" href="">
+                    <a class="nav-link" href="{{ route('cart.index') }}">
                         <i class="bi bi-cart"></i> Cart
                     </a>
                 </li>
 
                 @guest
-                    <!-- Auth Links for Guest -->
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('loginForm') }}">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('signupForm') }}">Sign Up</a>
-                    </li>
+                <!-- Auth Links for Guest -->
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('loginForm') }}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('signupForm') }}">Sign Up</a>
+                </li>
                 @else
-                    <!-- Auth Links for Logged-in User -->
-                    @if(auth()->user()->is_admin == 1)
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('admin.main')}}">Profile</a>
-                    </li>
-                    @endif
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            Logout
-                        </a>
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-                    </li>
+                <!-- Auth Links for Logged-in User -->
+                @if(auth()->user()->is_admin == 1)
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('admin.main')}}">Profile</a>
+                </li>
+                @endif
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                        Logout
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                </li>
                 @endguest
             </ul>
         </div>

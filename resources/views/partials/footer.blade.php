@@ -24,11 +24,11 @@
                                      <h3>Menu</h3>
                                      <ul>
                                          <li><a href="/">Home</a></li>
-                                         <li><a href="#">About</a></li>
-                                         <li><a href="#">Services</a></li>
-                                         <li><a href="#">Testimonial</a></li>
+                                         <li><a href="{{ route('about.show') }}">About</a></li>
+                                         <li><a href="{{route('services.show')}}">Services</a></li>
+                                         <li><a href="{{route('testimonial.show')}}">Testimonial</a></li>
                                          <li><a href="#">Blog</a></li>
-                                         <li><a href="#">Contact</a></li>
+                                         <li><a href="{{route('contact.show')}}">Contact</a></li>
                                      </ul>
                                  </div>
                              </div>
@@ -42,7 +42,7 @@
                                          <li><a href="{{route('loginForm')}}">Login</a></li>
                                          <li><a href="{{route('signupForm')}}">Register</a></li>
                                          @endguest
-                                         <li><a href="#">Shopping</a></li>
+                                         <li><a href="/">Shopping</a></li>
                                          <li><a href="#">Widget</a></li>
                                      </ul>
                                  </div>
