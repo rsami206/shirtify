@@ -18,34 +18,21 @@
                <div class="heart-icon">
                   <i class="ri-heart-line"></i>
                </div>
-
                <div class="option_container">
                   <div class="options">
-                     <!-- {{-- Success Message --}}
-                     @if(session('success'))
-                     <div class="alert alert-success mt-2">
-                        {{ session('success') }}
-                     </div>
-                     @endif -->
                      <form action="{{ route('cart.add', $product->id) }}" method="POST">
                         @csrf
                         <button type="submit" class=" option1">Add to Cart <i class="bi bi-cart"></i></button>
                      </form>
-
-
-
                      <a href="" class="option2">Buy Now</a>
                      <a href="{{route('shop.detail', $product->slug)}}" class="option3">Details</a>
-
                   </div>
                </div>
                <div class="img-box">
                   <img src="{{ asset('storage/' . $product->image_path) }}" alt="">
                </div>
-
                <div class="detail-box">
                   <h5>{{$product->name}}</h5>
-
                   <div class="product-price"><strong>Price : </strong>
                      @if($product->discounted_price && $product->discounted_price < $product->price)
                         <span class="text-danger fw-bold"> {{ number_format($product->discounted_price, 2) }}Rs/-</span>

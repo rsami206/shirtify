@@ -62,6 +62,7 @@
   <!-- custom js -->
   <script src=" {{ asset('js/custom.js') }}  "></script>
   @stack('script')
+  @stack('quantity-script')
 
 </body>
 

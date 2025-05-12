@@ -32,11 +32,12 @@
                                 <form action="{{ route('cart.update', $id) }}" method="POST" id="decrease-form-{{ $id }}" class="me-1">
                                     @csrf
                                     <input type="hidden" name="quantity" value="{{ $item['quantity'] - 1 }}">
-                                    <a href="javascript:void(0);"
-                                        onclick="document.getElementById('decrease-form-{{ $id }}').submit();"
-                                        class="btn  my-button {{ $item['quantity'] <= 1 ? 'disabled' : '' }}">
-                                        −
-                                    </a>
+                                   <a href="javascript:void(0);"
+   onclick="submitFormWithoutHistory('decrease-form-{{ $id }}')"
+   class="btn my-button {{ $item['quantity'] <= 1 ? 'disabled' : '' }}">
+   −
+</a>
+
                                 </form>
 
                                 <span class="badge fs-5 text-dark mx-2 px-3 py-2 ">
@@ -46,11 +47,11 @@
                                 <form action="{{ route('cart.update', $id) }}" method="POST" id="increase-form-{{ $id }}" class="ms-1">
                                     @csrf
                                     <input type="hidden" name="quantity" value="{{ $item['quantity'] + 1 }}">
-                                    <a href="javascript:void(0);"
-                                        onclick="document.getElementById('increase-form-{{ $id }}').submit();"
-                                        class="btn my-button ">
-                                        +
-                                    </a>
+                                   <a href="javascript:void(0);"
+   onclick="submitFormWithoutHistory('increase-form-{{ $id }}')"
+   class="btn my-button">
+   +
+</a>
                                 </form>
 
                             </div>
@@ -79,4 +80,45 @@
         </div>
     </div>
 </div>
+@push('quantity-script')
+<script>
+    function submitFormWithoutHistory(formId) {
+        const form = document.getElementById(formId);
+        const formData = new FormData(form);
+
+        fetch(form.action, {
+            method: form.method,
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: formData
+        }).then(() => {
+            window.location.replace(window.location.href); // no history entry
+        });
+    }
+    function submitFormWithoutHistory(formId) {
+        const form = document.getElementById(formId);
+        if (!form) return;
+
+        // Quantity check to avoid going below 1
+        const quantityInput = form.querySelector('input[name="quantity"]');
+        if (quantityInput && parseInt(quantityInput.value) < 1) {
+            return; // Don't submit if quantity < 1
+        }
+
+        const formData = new FormData(form);
+
+        fetch(form.action, {
+            method: form.method,
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: formData
+        }).then(() => {
+            window.location.replace(window.location.href);
+        });
+    }
+
+</script>
+@endpush
 @endsection
