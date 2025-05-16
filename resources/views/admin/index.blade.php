@@ -9,7 +9,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                   <div>
                     <h6 class="text-muted">Orders</h6>
-                    <h4>124</h4>
+                    <h4>{{$order}}</h4>
                   </div>
                   <i class="ri-shopping-cart-line card-icon"></i>
                 </div>
@@ -42,7 +42,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                   <div>
                     <h6 class="text-muted">Customers</h6>
-                    <h4>326</h4>
+                    <h4>{{$user}}</h4>
                   </div>
                   <i class="ri-user-line card-icon"></i>
                 </div>

@@ -37,7 +37,7 @@
                             <td>{{ $product->name }}</td>
                             <td>{{ $product->category->name ?? 'N/A' }}</td>
                             <td>
-                @if($product->image_path)
+                            @if($product->image_path)
                     <img src="{{ asset('storage/' . $product->image_path) }}" alt="{{ $product->name }}" style="width: 60px; height: auto;" class="img-thumbnail">
                 @else
                     <span class="text-muted">No image</span>

@@ -4,8 +4,11 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Order;
 use App\Models\Shirt;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -13,8 +16,13 @@ class AdminController extends Controller
     public function index()
 
     {
+        $user = User::all()->count();
+        $order = Order::all()->count();
         $products = Shirt::all()->count();
-        return view("admin.index",compact('products'));
+        $product=Shirt::latest()->get();
+        // dd($product);
+
+        return view("admin.index",compact('products','order','user','product'));
     }
 
     public function products() 
@@ -26,7 +34,8 @@ class AdminController extends Controller
 
     public function orders() 
     {
-        return view("admin.orders.index");
+         $orders = Order::with(['user', 'items'])->latest()->get(); // Load related user
+    return view('admin.orders.index', compact('orders'));
     }
     public function category() 
     {

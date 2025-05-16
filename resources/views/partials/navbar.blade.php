@@ -39,7 +39,7 @@
                 <!-- Cart Link -->
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('cart.index') }}">
-                        <i class="bi bi-cart"></i> Cart
+                        <i class="bi bi-cart"></i> Cart {{count(session()->get('cart',[]));}}
                     </a>
                 </li>
 
@@ -52,6 +52,11 @@
                     <a class="nav-link" href="{{ route('signupForm') }}">Sign Up</a>
                 </li>
                 @else
+                @Auth
+                  <li class="nav-item">
+                    <a class="nav-link" href="{{ route('orders.index') }}">Order</a>
+                </li>
+                @endAuth
                 <!-- Auth Links for Logged-in User -->
                 @if(auth()->user()->is_admin == 1)
                 <li class="nav-item">

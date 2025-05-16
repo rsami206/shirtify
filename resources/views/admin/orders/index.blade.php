@@ -14,6 +14,7 @@
                 <thead class="table-light">
                   <tr>
                     <th>#</th>
+                    <th>user_id</th>
                     <th>Customer</th>
                     <th>Total</th>
                     <th>Status</th>
@@ -21,13 +22,32 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1024</td>
-                    <td>Sarah Ahmad</td>
-                    <td>$49.99</td>
-                    <td><span class="badge bg-success">Paid</span></td>
-                    <td>2025-04-28</td>
-                  </tr>
+
+                   @forelse($orders as $order)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{$order->user_id}}</td>
+                            <td>{{$order->user->name }}</td>
+                            <td>{{ $order->total_amount }}</td>
+                            
+                             <td>
+                            <span class="badge 
+                                @if($order->status == 'pending') bg-warning 
+                                @elseif($order->status == 'completed') bg-success 
+                                @elseif($order->status == 'cancelled') bg-danger 
+                                @else bg-secondary 
+                                @endif
+                            ">
+                                {{ ucfirst($order->status) }}
+                            </span>
+                        </td>
+                               <td>{{ $order->created_at->format('d M Y') }}</td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="6">No order found.</td>
+                        </tr>
+                    @endforelse
                 </tbody>
               </table>
             </div>

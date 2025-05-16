@@ -32,11 +32,11 @@
                                 <form action="{{ route('cart.update', $id) }}" method="POST" id="decrease-form-{{ $id }}" class="me-1">
                                     @csrf
                                     <input type="hidden" name="quantity" value="{{ $item['quantity'] - 1 }}">
-                                   <a href="javascript:void(0);"
-   onclick="submitFormWithoutHistory('decrease-form-{{ $id }}')"
-   class="btn my-button {{ $item['quantity'] <= 1 ? 'disabled' : '' }}">
-   −
-</a>
+                                    <a href="javascript:void(0);"
+                                        onclick="submitFormWithoutHistory('decrease-form-{{ $id }}')"
+                                        class="btn my-button {{ $item['quantity'] <= 1 ? 'disabled' : '' }}">
+                                        −
+                                    </a>
 
                                 </form>
 
@@ -47,11 +47,11 @@
                                 <form action="{{ route('cart.update', $id) }}" method="POST" id="increase-form-{{ $id }}" class="ms-1">
                                     @csrf
                                     <input type="hidden" name="quantity" value="{{ $item['quantity'] + 1 }}">
-                                   <a href="javascript:void(0);"
-   onclick="submitFormWithoutHistory('increase-form-{{ $id }}')"
-   class="btn my-button">
-   +
-</a>
+                                    <a href="javascript:void(0);"
+                                        onclick="submitFormWithoutHistory('increase-form-{{ $id }}')"
+                                        class="btn my-button">
+                                        +
+                                    </a>
                                 </form>
 
                             </div>
@@ -75,7 +75,7 @@
                 <p>Subtotal: <span class="float-end">${{ $subtotal }}</span></p>
                 <p>Shipping: <span class="float-end">${{ $shipping }}</span></p>
                 <h5>Total: <span class="float-end">${{ $total }}</span></h5>
-                <a href="#" class="btn btn-dark w-100 mt-3">Proceed to Checkout</a>
+                <a href="{{route('orderplace')}}" class="btn btn-dark w-100 mt-3">Proceed to Checkout</a>
             </div>
         </div>
     </div>
@@ -96,6 +96,7 @@
             window.location.replace(window.location.href); // no history entry
         });
     }
+
     function submitFormWithoutHistory(formId) {
         const form = document.getElementById(formId);
         if (!form) return;
@@ -118,7 +119,6 @@
             window.location.replace(window.location.href);
         });
     }
-
 </script>
 @endpush
 @endsection

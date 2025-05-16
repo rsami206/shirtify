@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ContectController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,8 +19,6 @@ Route::get('/shirt/{slug}', [BlogController::class, 'detail'])->name('shop.detai
 Route::get("/login", [AuthController::class, 'loginForm'])->name("loginForm");
 Route::post("/login", [AuthController::class, 'login'])->name("login");
 Route::post("/logout", [AuthController::class, 'logout'])->name('logout');
-
-
 Route::get("/signup", [AuthController::class, 'signupForm'])->name("signupForm");
 Route::post("/register", [AuthController::class, 'register'])->name("register");
 
@@ -81,3 +80,10 @@ Route::post('/cart/update/{id}', [CartController::class, 'update'])->name('cart.
 Route::get('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
 
 // });
+
+// orders route
+
+Route::get('/place-order', [OrderController::class, 'placeOrder'])->name('orderplace')->middleware('auth');
+Route::get('/my-orders', [OrderController::class, 'index'])->name('orders.index')->middleware('auth');
+Route::get('/orders/{id}', [OrderController::class, 'show'])->name('orders.show')->middleware('auth');
+

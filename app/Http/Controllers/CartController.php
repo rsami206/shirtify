@@ -33,6 +33,7 @@ class CartController extends Controller
             }
         } else {
             $cart[$id] = [
+                'id'=>$id,
                 'name' => $product->name,
                 'price' => $product->price,
                 'quantity' => 1,
